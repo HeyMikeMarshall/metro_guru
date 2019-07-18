@@ -3,6 +3,7 @@ _instructions/
 config.js
 config.py
 config.ini
+settings.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
