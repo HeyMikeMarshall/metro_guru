@@ -1,0 +1,2 @@
+const API_KEY = "c28598805ca5482794007af78ae0bd33";
+const LEAFLET_API_KEY = "pk.eyJ1Ijoia2J1Y2tpbmdoYW0iLCJhIjoiY2p4aGxteDljMGVmZTN3bzlpaDFhcHh0eCJ9.Ht1pn6_BaHGI-S51VkZ6vQ";
