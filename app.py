@@ -38,8 +38,16 @@ def stationlist():
     stations = mongo.db.stations.find()
     result= []
     for station in stations: 
+        
         result.append({"name":station['Name'],
-                        "code":station['Code']})
+                        "code":station['Code'],
+                        "lat":station['Lat'],
+                        "lng":station['Lon'],
+                        "linecode1":station['LineCode1'],
+                        "linecode2":station['LineCode2'],
+                        "linecode3":station['LineCode3'],
+                        "linecode4":station['LineCode4']
+                        })
     return jsonify(result)
 
 
