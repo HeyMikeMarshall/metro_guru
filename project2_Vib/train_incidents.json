@@ -1,0 +1,125 @@
+
+{
+  "Incidents": [{
+    "IncidentID": "6CE4F890-16F4-4B02-BFAE-4148CF9957C8",
+    "Description": "To avoid large crowds, customers traveling south-bound to Van Dorn St should board shuttle buses at Nat'l Airport.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "BL;",
+    "DateUpdated": "2019-06-11T04:49:19"
+  }, {
+    "IncidentID": "DC54D1DC-2C07-42A1-8752-E22BDDA218A7",
+    "Description": "Due to platform improvement project express shuttles operate btwn Franconia and Pentagon.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "BL;",
+    "DateUpdated": "2019-06-11T04:41:38"
+  }, {
+    "IncidentID": "533526F5-882E-4D01-9769-C250786B013D",
+    "Description": "Thru Sept 8, buses replace trains btwn Franconia & Nat'l Airport due to platform improvement project.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "BL;",
+    "DateUpdated": "2019-06-11T04:18:51"
+  }, {
+    "IncidentID": "3DA603E1-CC36-4C4E-9D73-EC60482B7A46",
+    "Description": "Thru Sept 8, Blue Line shuttle buses operate btwn Franconia, Van Dorn St, King St & Nat'l Airport due to platform improvement project.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "BL; YL;",
+    "DateUpdated": "2019-06-11T04:33:57"
+  }, {
+    "IncidentID": "3A8A3947-6650-46A9-AEA9-D96227E3EFEF",
+    "Description": "Thru Sept 8, Yel Line buses btwn Huntington, Eisenhower Ave, King St, Braddock Rd, & Crystal City due to platform improvement project.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "BL; YL;",
+    "DateUpdated": "2019-06-11T04:31:29"
+  }, {
+    "IncidentID": "A60D8EFF-E20E-4120-8BB3-92518682132B",
+    "Description": "Due to the platform improvement project, express shuttles operate between Landmark Mall and Pentagon on weekdays only from 4:45am-8:15pm.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "BL; YL;",
+    "DateUpdated": "2019-06-11T04:28:04"
+  }, {
+    "IncidentID": "2F2C4758-26DC-4781-BED2-20407CAF314A",
+    "Description": "Thru Sept 8, Franconia, Van Dorn St, King St, Braddock Rd, Eisenhower & Huntington closed for platform improvement project. Buses available.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "BL; YL;",
+    "DateUpdated": "2019-06-11T04:25:32"
+  }, {
+    "IncidentID": "A2E13BF0-D2B0-43CF-AF38-CF993694A051",
+    "Description": "To avoid large crowds, customers traveling south-bound to Eisenhower Ave, King St & Braddock Rd should board shuttle buses at Crystal City.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "YL;",
+    "DateUpdated": "2019-06-11T04:46:35"
+  }, {
+    "IncidentID": "FB71ACEA-1B35-438B-8DB3-BBD7014B7113",
+    "Description": "Due to platform improvement project express shuttles operate btwn Huntington & Pentagon.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "YL;",
+    "DateUpdated": "2019-06-11T04:43:23"
+  }, {
+    "IncidentID": "392B3912-8191-4188-B836-D3218EA033A9",
+    "Description": "Trains are operating btwn Nat'l Airport & Greenbelt due to platform improvement project.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "YL;",
+    "DateUpdated": "2019-06-11T04:38:16"
+  }, {
+    "IncidentID": "EC988C49-5667-4378-BB17-D3FEABF6E11B",
+    "Description": "Thru Sept 8, buses replace trains btwn Huntington & Crystal City due to platform improvement project.",
+    "StartLocationFullName": null,
+    "EndLocationFullName": null,
+    "PassengerDelay": 0.0,
+    "DelaySeverity": null,
+    "IncidentType": "Alert",
+    "EmergencyText": null,
+    "LinesAffected": "YL;",
+    "DateUpdated": "2019-06-11T04:32:39"
+  }]
+}
