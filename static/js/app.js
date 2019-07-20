@@ -67,7 +67,7 @@ var baselayers = {
 var overlays = {
     "Rail Stations":railstations,
     "Rail Lines":raillines,
-    "buses":buses,
+    "Bus Positions":buses,
     "Selected Bus Route":busroutes,
     "All Bus Routes":allbus
 }
