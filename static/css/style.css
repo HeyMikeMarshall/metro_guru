@@ -6,6 +6,12 @@
     display: block;
 }
 
+.selector {
+    width: 90%;
+}
+
+
+
 .bus-marker {
     transition: all 3s;
 }

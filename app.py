@@ -18,7 +18,6 @@ mongo = PyMongo(app, uri ="mongodb://ds131737.mlab.com:31737/heroku_2xs5kb65",
                             password = os.environ['auth'],
                             authSource = os.environ['authSource'],
                             authMechanism = os.environ['authMech'])
-                    
 
 
 
@@ -144,6 +143,22 @@ def getBusPositions():
     bus_positions = requests.get(bus_loc_url, params=params).json()
 
     return jsonify(bus_positions)
+
+@app.route("/activebusroutes")
+def getActiveBus():
+    bus_loc_url = "https://api.wmata.com/Bus.svc/json/jBusPositions"
+    params = {"api_key":os.environ['metro_api']}
+    response = requests.get(bus_loc_url, params=params).json()
+    buspos = response['BusPositions']
+    activelines = []
+    for bus in buspos:
+        if bus['RouteID'] not in activelines:
+            activelines.append(bus['RouteID'])
+    return jsonify(activelines)
+
+
+
+
 
 
 if __name__ == "__main__":

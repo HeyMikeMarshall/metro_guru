@@ -23,7 +23,9 @@
       <div class="col-md-4">
         <div class="well">
           <h5>Select Station:</h5>
-          <select id="selStation" onchange="optionChanged(this.value)"></select>
+          <select class="selector" id="selStation" onchange="stnOpChanged(this.value)"></select>
+          <h5>Select a Bus Route:</h5>
+          <select class="selector" id="selBusRoute" onchange="busOpChanged(this.value)"></select>
         </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
