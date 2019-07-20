@@ -42,6 +42,15 @@ var map = L.map("map", {
     layers:[raillines, railstations, busses, buslines]
 });
 
+var streets = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+                attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+                maxZoom: 20,
+                id: "mapbox.mapbox-streets-v8",
+                accessToken: "pk.eyJ1IjoiaGV5bWlrZW1hcnNoYWxsIiwiYSI6ImNqeGhsanR0cDA1NTAzeW9oazAwdm1nZWwifQ.sD4PxAzXdNRNvY2kbbFTGQ"
+                }).addTo(map);     
+
+
+
 
 
 var baselayers = {
@@ -181,12 +190,7 @@ function initMap() {
         })
         railstations.addTo(map)
         
-        L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-            attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-            maxZoom: 20,
-            id: "mapbox.streets",
-            accessToken: "pk.eyJ1IjoiaGV5bWlrZW1hcnNoYWxsIiwiYSI6ImNqeGhsanR0cDA1NTAzeW9oazAwdm1nZWwifQ.sD4PxAzXdNRNvY2kbbFTGQ"
-            }).addTo(map);     
+
 };
 
 function buildStationInfo(station){
