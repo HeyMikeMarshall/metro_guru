@@ -33,7 +33,7 @@ var routeColors = {'blue': ['30','32','34','36','39','90','92','M6','B2','3Y','7
 };
 var raillines = L.layerGroup();
 var railstations = L.layerGroup();
-var busses = L.layerGroup();
+var buses = L.layerGroup();
 var busroutes = L.layerGroup();
 var allbus = L.layerGroup();
 
@@ -65,9 +65,9 @@ var baselayers = {
 }
 
 var overlays = {
-    "Rail Lines":raillines,
     "Rail Stations":railstations,
-    "Busses":busses,
+    "Rail Lines":raillines,
+    "buses":buses,
     "Selected Bus Route":busroutes,
     "All Bus Routes":allbus
 }
@@ -257,7 +257,7 @@ function buspipcolor(route) {
 
 
 function getBusses() {   
-    busses.clearLayers()
+    buses.clearLayers()
     d3.json('/buspositions').then(function(response){ 
             busarray = response.BusPositions
             for (bus in busarray){
@@ -271,7 +271,7 @@ function getBusses() {
                     radius: 15,
                     route: info.RouteID,
                     className: 'bus-marker'                    
-                }).addTo(busses)
+                }).addTo(buses)
                   .bindPopup(`<b>${info.TripHeadsign}</b> <p>Route:${info.RouteID}`)
                 .on('click', function(e){
                     busroutes.clearLayers()              
@@ -283,7 +283,7 @@ function getBusses() {
                     }}});
                     
     });};});
-    busses.addTo(map)
+    buses.addTo(map)
     busroutes.addTo(map)
 };
 
