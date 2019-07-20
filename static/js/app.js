@@ -33,9 +33,11 @@ var routeColors = {'blue': ['30','32','34','36','39','90','92','M6','B2','3Y','7
 };
 var raillines = L.layerGroup();
 var railstations = L.layerGroup();
-var busses = L.layerGroup();
+var buses = L.layerGroup();
 var busroutes = L.layerGroup();
 var allbus = L.layerGroup();
+
+
 
 var map = L.map("map", {
     center: [initlat, initlng],
@@ -65,9 +67,9 @@ var baselayers = {
 }
 
 var overlays = {
-    "Rail Lines":raillines,
     "Rail Stations":railstations,
-    "Busses":busses,
+    "Rail Lines":raillines,
+    "Bus Positions":buses,
     "Selected Bus Route":busroutes,
     "All Bus Routes":allbus
 }
@@ -157,9 +159,6 @@ function tabulate(data, columns, divid) {
 };
 
 function initMap() {
-        
-
-    
     
     d3.json(raillinesurl).then(function(data){
                 L.geoJSON(data, {
@@ -256,8 +255,8 @@ function buspipcolor(route) {
 }
 
 
-function getBusses() {   
-    busses.clearLayers()
+function getBuses() {   
+    buses.clearLayers()
     d3.json('/buspositions').then(function(response){ 
             busarray = response.BusPositions
             for (bus in busarray){
@@ -271,7 +270,7 @@ function getBusses() {
                     radius: 15,
                     route: info.RouteID,
                     className: 'bus-marker'                    
-                }).addTo(busses)
+                }).addTo(buses)
                   .bindPopup(`<b>${info.TripHeadsign}</b> <p>Route:${info.RouteID}`)
                 .on('click', function(e){
                     busroutes.clearLayers()              
@@ -282,8 +281,14 @@ function getBusses() {
                                     style: { color: "#ea00ff" }} ).addTo(busroutes)
                     }}});
                     
-    });};});
-    busses.addTo(map)
+                })
+                
+
+
+
+
+};});
+    buses.addTo(map)
     busroutes.addTo(map)
 };
 
@@ -380,7 +385,7 @@ function init(){
 
 init();
 initMap();
-getBusses();
+getBuses();
 busSelectRefresh()
 
 d3.interval(function(){
@@ -388,5 +393,5 @@ d3.interval(function(){
 })
 d3.interval(function(){
     updateTrainTable();
-    getBusses();
+    getBuses();
 }, 20000)
