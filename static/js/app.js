@@ -6,8 +6,6 @@ var raillinesurl = "static/js/Metro_Lines_Regional.geojson"
 var buslinesurl = "static/js/Metro_Bus_Lines.geojson"
 var initlat = "38.898303"
 var initlng = "-77.028099"
-var MAP_KEY = System.getenv("MAP_KEY")
-console.log(MAP_KEY)
 
 var routeColors = {'blue': ['30','32','34','36','39','90','92','M6','B2','3Y','7Y','11','16','32','33','V1','V4','36',
 '37','38','39','42','43','80','D1','D4','B2','D5','D6','G8','L2','N2','N4',
@@ -171,7 +169,7 @@ function initMap() {
             attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
             maxZoom: 20,
             id: "mapbox.streets",
-            accessToken: MAP_KEY
+            accessToken: "pk.eyJ1IjoiaGV5bWlrZW1hcnNoYWxsIiwiYSI6ImNqeGhsanR0cDA1NTAzeW9oazAwdm1nZWwifQ.sD4PxAzXdNRNvY2kbbFTGQ"
             }).addTo(map);     
 };
 
