@@ -42,6 +42,20 @@ var railstations = L.layerGroup();
 var busses = L.layerGroup();
 var buslines = L.layerGroup();
 
+var baselayers = {
+
+}
+
+var overlays = {
+    "Rail Lines":raillines,
+    "Rail Stations":railstations,
+    "Busses":busses,
+    "Bus Lines":buslines
+}
+
+L.control.layers(baselayers, overlays).addTo(map);
+
+
 function flyTo(lat,lon){
     map.flyTo([lat,lon],15);
     marker = L.marker([lat,lon])
