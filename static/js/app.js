@@ -364,7 +364,6 @@ function busSelectRefresh(){
 
 
 
-
 function init(){
     var selector = d3.select("#selStation");
     d3.json("/stations").then((data) => {
@@ -377,9 +376,6 @@ function init(){
     const firstStation = "A01";
     buildStationInfo(firstStation);
 };
-
-
-
 
 
 init();
