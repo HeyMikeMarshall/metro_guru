@@ -6,9 +6,6 @@ from flask import Flask, jsonify, render_template, redirect
 from flask_pymongo import PyMongo
 import configparser
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-cfg = config['Connection Info']
 
 
 
