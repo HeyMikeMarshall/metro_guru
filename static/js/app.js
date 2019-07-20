@@ -39,7 +39,7 @@ var allbus = L.layerGroup();
 
 var map = L.map("map", {
     center: [initlat, initlng],
-    zoom: 10
+    zoom: 1
 });
 
 // var streets = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
