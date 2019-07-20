@@ -31,6 +31,10 @@ var routeColors = {'blue': ['30','32','34','36','39','90','92','M6','B2','3Y','7
 '54','59','H1','H2','H3','H4','H8','60','64','80','E2','E4','F6','K2','K6','K9',
 'R1','R2','42','X2','X9','62','63','64','5A','V1','G2','G8','G9','90','92','96',]
 };
+var raillines = L.layerGroup();
+var railstations = L.layerGroup();
+var busses = L.layerGroup();
+var buslines = L.layerGroup();
 
 var map = L.map("map", {
     center: [initlat, initlng],
@@ -38,10 +42,7 @@ var map = L.map("map", {
     layers:[raillines, railstations, busses, buslines]
 });
 
-var raillines = L.layerGroup();
-var railstations = L.layerGroup();
-var busses = L.layerGroup();
-var buslines = L.layerGroup();
+
 
 var baselayers = {
 
