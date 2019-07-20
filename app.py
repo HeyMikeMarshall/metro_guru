@@ -14,10 +14,10 @@ import configparser
 
 app = Flask(__name__)
 mongo = PyMongo(app, uri ="mongodb://ds131737.mlab.com:31737/heroku_2xs5kb65",
-                            username = os.environ['dbuser'],
-                            password = os.environ['auth'],
-                            authSource = os.environ['authSource'],
-                            authMechanism = os.environ['authMech'])
+                            username = cfg['dbuser'],
+                            password = cfg['auth'],
+                            authSource = cfg['authSource'],
+                            authMechanism = cfg['authMech'])
                     
 
 
