@@ -34,7 +34,8 @@ var routeColors = {'blue': ['30','32','34','36','39','90','92','M6','B2','3Y','7
 
 var map = L.map("map", {
     center: [initlat, initlng],
-    zoom: 15
+    zoom: 15,
+    layers:[raillines, railstations, busses, buslines]
 });
 
 var raillines = L.layerGroup();
