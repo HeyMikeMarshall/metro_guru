@@ -6,6 +6,8 @@ var raillinesurl = "static/js/Metro_Lines_Regional.geojson"
 var buslinesurl = "static/js/Metro_Bus_Lines.geojson"
 var initlat = "38.898303"
 var initlng = "-77.028099"
+var MAP_KEY = process.env.MAP_KEY
+console.log(MAP_KEY)
 
 var routeColors = {'blue': ['30','32','34','36','39','90','92','M6','B2','3Y','7Y','11','16','32','33','V1','V4','36',
 '37','38','39','42','43','80','D1','D4','B2','D5','D6','G8','L2','N2','N4',
