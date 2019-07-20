@@ -6,6 +6,10 @@ from flask import Flask, jsonify, render_template, redirect
 from flask_pymongo import PyMongo
 import configparser
 
+config = configparser.ConfigParser()
+config.read('config.ini')
+cfg = config['Connection Info']
+
 
 
 #################################################
@@ -114,7 +118,7 @@ def stationinfo(code):
             "lng": station[0]['Lon']}
 
     predict_url = f'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/'
-    params = {"api_key":os.environ['metro_api']}
+    params = {"api_key":cfg['metro_api']}
     trains1 = requests.get(f'{predict_url}{code}', params=params).json()
     result['trains1'] = trains1['Trains']
 
@@ -140,10 +144,26 @@ def stationinfo(code):
 @app.route("/buspositions")
 def getBusPositions():
     bus_loc_url = "https://api.wmata.com/Bus.svc/json/jBusPositions"
-    params = {"api_key":os.environ['metro_api']}
+    params = {"api_key":cfg['metro_api']}
     bus_positions = requests.get(bus_loc_url, params=params).json()
 
     return jsonify(bus_positions)
+
+@app.route("/activebusroutes")
+def getActiveBus():
+    bus_loc_url = "https://api.wmata.com/Bus.svc/json/jBusPositions"
+    params = {"api_key":cfg['metro_api']}
+    response = requests.get(bus_loc_url, params=params).json()
+    buspos = response['BusPositions']
+    activelines = []
+    for bus in buspos:
+        if bus['RouteID'] not in activelines:
+            activelines.append(bus['RouteID'])
+    return jsonify(activelines)
+
+
+
+
 
 
 if __name__ == "__main__":

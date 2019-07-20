@@ -3,7 +3,7 @@ var marker;
 var linelist = [];
 var tgtstn = "A01";
 var raillinesurl = "static/js/Metro_Lines_Regional.geojson"
-var buslinesurl = "static/js/Metro_Bus_Lines.geojson"
+var busroutesurl = "static/js/Metro_Bus_Lines.geojson"
 var initlat = "38.898303"
 var initlng = "-77.028099"
 
@@ -34,23 +34,31 @@ var routeColors = {'blue': ['30','32','34','36','39','90','92','M6','B2','3Y','7
 var raillines = L.layerGroup();
 var railstations = L.layerGroup();
 var busses = L.layerGroup();
-var buslines = L.layerGroup();
+var busroutes = L.layerGroup();
+var allbus = L.layerGroup();
 
 var map = L.map("map", {
     center: [initlat, initlng],
     zoom: 15
 });
 
-var streets = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-                attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-                maxZoom: 20,
-                id: "mapbox.mapbox-streets-v8",
-                accessToken: "pk.eyJ1IjoiaGV5bWlrZW1hcnNoYWxsIiwiYSI6ImNqeGhsanR0cDA1NTAzeW9oazAwdm1nZWwifQ.sD4PxAzXdNRNvY2kbbFTGQ"
-                }).addTo(map);     
+// var streets = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+//                 attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+//                 maxZoom: 20,
+//                 id: "mapbox.mapbox-streets-v8",
+//                 accessToken: "pk.eyJ1IjoiaGV5bWlrZW1hcnNoYWxsIiwiYSI6ImNqeGhsanR0cDA1NTAzeW9oazAwdm1nZWwifQ.sD4PxAzXdNRNvY2kbbFTGQ"
+//                 }).addTo(map);     
 
+// var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+//                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+//                     subdomains: 'abcd',
+//                     maxZoom: 19
+//                 }).addTo(map);
 
-
-
+var Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+	maxZoom: 16
+}).addTo(map);
 
 var baselayers = {
 
@@ -60,7 +68,8 @@ var overlays = {
     "Rail Lines":raillines,
     "Rail Stations":railstations,
     "Busses":busses,
-    "Bus Lines":buslines
+    "Selected Bus Route":busroutes,
+    "All Bus Routes":allbus
 }
 
 L.control.layers(baselayers, overlays).addTo(map);
@@ -148,7 +157,11 @@ function tabulate(data, columns, divid) {
 };
 
 function initMap() {
-        d3.json(raillinesurl).then(function(data){
+        
+
+    
+    
+    d3.json(raillinesurl).then(function(data){
                 L.geoJSON(data, {
                     style: function(feature) {
                         switch (feature.properties.NAME) {
@@ -218,6 +231,7 @@ function buildStationInfo(station){
             popuphtml = popuphtml.concat(`${bubble}`)
         }
         marker.bindPopup(popuphtml).openPopup()
+        marker.on("dblclick", function (e){map.removeLayer(marker)});
     });
 };
 
@@ -260,15 +274,17 @@ function getBusses() {
                 }).addTo(busses)
                   .bindPopup(`<b>${info.TripHeadsign}</b> <p>Route:${info.RouteID}`)
                 .on('click', function(e){
-                    buslines.clearLayers()              
-                    d3.json(buslinesurl).then(function(data){
+                    busroutes.clearLayers()              
+                    d3.json(busroutesurl).then(function(data){
                         for (var i = 0; i < data.features.length; i++) {
                             if (data.features[i].properties.ROUTE === e.target.options.route){
-                                L.geoJSON(data.features[i]).addTo(buslines)
+                                L.geoJSON(data.features[i], {
+                                    style: { color: "#ea00ff" }} ).addTo(busroutes)
                     }}});
-                    buslines.addTo(map)
+                    
     });};});
     busses.addTo(map)
+    busroutes.addTo(map)
 };
 
 
@@ -300,10 +316,54 @@ function updateTrainTable() {
 };
 
 
-function optionChanged(newStation) {
+function stnOpChanged(newStation) {
     tgtstn = newStation
     buildStationInfo(newStation);
 };
+
+function busOpChanged(route) {
+    busroutes.clearLayers()              
+    d3.json(busroutesurl).then(function(data){
+        for (var i = 0; i < data.features.length; i++) {
+        if (data.features[i].properties.ROUTE === route){
+            L.geoJSON(data.features[i], {
+                style: { color: "#ea00ff" }})
+            .addTo(busroutes)
+    }}});
+    busroutes.addTo(map)
+}
+
+
+
+
+
+
+function busSelectRefresh(){
+    var selector = d3.select("#selBusRoute").html("");
+    var activeroutes = []
+    d3.json(`/activebusroutes`).then(function(routes){
+        activeroutes = routes.sort()
+            for (var i = 0; i < activeroutes.length; i++){
+                selector
+                .append("option")
+                .text(activeroutes[i])
+                .property("value", activeroutes[i])
+            }
+
+            d3.json(busroutesurl).then(function(data){
+                for (var i = 0; i < data.features.length; i++) {
+                    if (activeroutes.includes(data.features[i].properties.ROUTE) == true){
+                        L.geoJSON(data.features[i],
+                            {style:{color:"#455f6e"}}).addTo(allbus)
+                    }
+                }    
+            })    
+    })
+    
+}
+
+
+
 
 function init(){
     var selector = d3.select("#selStation");
@@ -314,15 +374,18 @@ function init(){
             .text(data[station].name)
             .property("value", station);
             }});
-        const firstStation = "A01";
-        buildStationInfo(firstStation)
+    const firstStation = "A01";
+    buildStationInfo(firstStation);
 };
+
+
+
 
 
 init();
 initMap();
 getBusses();
-
+busSelectRefresh()
 
 d3.interval(function(){
     clock();
