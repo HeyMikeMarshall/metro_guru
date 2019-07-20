@@ -38,8 +38,7 @@ var buslines = L.layerGroup();
 
 var map = L.map("map", {
     center: [initlat, initlng],
-    zoom: 15,
-    layers:[raillines, railstations, busses, buslines]
+    zoom: 15
 });
 
 var streets = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
