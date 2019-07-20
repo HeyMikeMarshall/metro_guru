@@ -40,6 +40,7 @@ var map = L.map("map", {
 var raillines = L.layerGroup();
 var railstations = L.layerGroup();
 var busses = L.layerGroup();
+var buslines = L.layerGroup();
 
 function flyTo(lat,lon){
     map.flyTo([lat,lon],15);
@@ -142,13 +143,25 @@ function initMap() {
         d3.json("/stations").then(function(data){
             for (station in data) {
                 var info = data[station]
+                var linelist = info.svclines
+                var popuphtml = `<p><b>${info.name}</b>`
+                var chkin = []
+                for (var i = 0; i < linelist.length; i++) {
+                    var cy = 10
+                    var cx = (i * 20 + 10)
+                    if (chkin.includes(linelist[i]) == false)
+                        bubble = mkSvg(linelist[i], cx, cy, 100)                 
+                        popuphtml = popuphtml.concat(`${bubble}`)
+                        chkin.push(linelist[i])
+                }
                 L.circle([info.lat, info.lng], {
                         color: "#000",
                         fillColor: "#fff",
                         fillOpacity: 1,
                         radius: 50
-                    }).addTo(railstations)}
-            
+                    })
+                    .bindPopup(popuphtml)
+                    .addTo(railstations)}
         })
         railstations.addTo(map)
         
@@ -219,18 +232,25 @@ function getBusses() {
                 pipcolor = buspipcolor(info.RouteID)
                 L.circle([info.Lat, info.Lon], {
                     color: "#000",
-                    weight: 1,
+                    weight: 2,
                     fillColor: pipcolor,
                     fillOpacity: 1,
-                    radius: 10,
-                    className: 'bus-marker',
-                    transition: 'all 1s'
+                    radius: 15,
+                    route: info.RouteID,
+                    className: 'bus-marker'                    
                 }).addTo(busses)
-                .bindPopup(`<b>${info.TripHeadsign}</b> <p>Route:${info.RouteID}`)
-            ;}
-        })
+                  .bindPopup(`<b>${info.TripHeadsign}</b> <p>Route:${info.RouteID}`)
+                .on('click', function(e){
+                    buslines.clearLayers()              
+                    d3.json(buslinesurl).then(function(data){
+                        for (var i = 0; i < data.features.length; i++) {
+                            if (data.features[i].properties.ROUTE === e.target.options.route){
+                                L.geoJSON(data.features[i]).addTo(buslines)
+                    }}});
+                    buslines.addTo(map)
+    });};});
     busses.addTo(map)
-}
+};
 
 
 function clock() {
@@ -277,7 +297,6 @@ function init(){
             }});
         const firstStation = "A01";
         buildStationInfo(firstStation)
-        
 };
 
 
