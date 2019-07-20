@@ -9,3 +9,8 @@
 .bus-marker {
     transition: all 3s;
 }
+
+.carousel {
+    width:640px;
+    height:360px;
+  }
