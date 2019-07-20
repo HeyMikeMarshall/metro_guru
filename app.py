@@ -17,11 +17,7 @@ cfg = config['Connection Info']
 #################################################
 
 app = Flask(__name__)
-mongo = PyMongo(app, uri ="mongodb://ds131737.mlab.com:31737/heroku_2xs5kb65",
-                            username = cfg['dbuser'],
-                            password = cfg['auth'],
-                            authSource = cfg['authSource'],
-                            authMechanism = cfg['authMech'])
+mongo = PyMongo(app, uri = MONGODB_URI)
                     
 
 
@@ -118,7 +114,7 @@ def stationinfo(code):
             "lng": station[0]['Lon']}
 
     predict_url = f'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/'
-    params = {"api_key":cfg['metro_api']}
+    params = {"api_key":metro_api}
     trains1 = requests.get(f'{predict_url}{code}', params=params).json()
     result['trains1'] = trains1['Trains']
 
@@ -144,7 +140,7 @@ def stationinfo(code):
 @app.route("/buspositions")
 def getBusPositions():
     bus_loc_url = "https://api.wmata.com/Bus.svc/json/jBusPositions"
-    params = {"api_key":cfg['metro_api']}
+    params = {"api_key":metro_api}
     bus_positions = requests.get(bus_loc_url, params=params).json()
 
     return jsonify(bus_positions)
